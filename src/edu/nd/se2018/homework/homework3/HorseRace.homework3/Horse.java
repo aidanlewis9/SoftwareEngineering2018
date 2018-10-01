@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework3;
+
 
 public class Horse {
     private final float DISTANCE_MODIFIER = 50f;

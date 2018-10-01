@@ -1,5 +1,3 @@
-package edu.nd.se2018.homework.homework3;
-
 import org.junit.Test;
 
 public class HorseTest {
