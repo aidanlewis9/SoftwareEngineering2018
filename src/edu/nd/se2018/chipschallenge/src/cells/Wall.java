@@ -1,28 +1,23 @@
 package cells;
 
-import main.Player;
-import utilities.Color;
-import utilities.IVProducer;
 import javafx.scene.image.ImageView;
+import utilities.IVProducer;
 
 import java.awt.*;
 
-public class DoorCell implements Cell {
+public class Wall implements CellBehavior {
 
     private ImageView iv;
     private Point position;
-    private Color key;
 
-    public DoorCell(final int x, final int y, final Color color) {
+    public Wall(final int x, final int y) {
         position = new Point(x, y);
-        key = color;
-        final String filepath = String.format("textures/%sKeyWall.PNG", color.getString());
-        iv = new IVProducer(filepath, position.x, position.y).getImageView();
+        iv = new IVProducer("textures/wall.PNG", position.x, position.y).getImageView();
     }
 
     @Override
     public boolean canEnter() {
-        return Player.getInstance().useKey(key);
+        return false;
     }
 
     @Override
@@ -55,3 +50,4 @@ public class DoorCell implements Cell {
         return position.y;
     }
 }
+

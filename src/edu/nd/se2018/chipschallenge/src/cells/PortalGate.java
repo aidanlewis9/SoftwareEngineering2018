@@ -1,22 +1,27 @@
 package cells;
 
-import javafx.scene.image.ImageView;
+import main.Grid;
 import utilities.IVProducer;
+import javafx.scene.image.ImageView;
 
 import java.awt.*;
 
-public class WallCell implements Cell {
+public class PortalGate implements CellBehavior {
 
     private ImageView iv;
     private Point position;
 
-    public WallCell(final int x, final int y) {
+    public PortalGate(final int x, final int y) {
         position = new Point(x, y);
-        iv = new IVProducer("textures/wall.PNG", position.x, position.y).getImageView();
+        iv = new IVProducer("textures/portalGate.PNG", x, y).getImageView();
     }
 
     @Override
     public boolean canEnter() {
+        if (Grid.getInstance().allChipsTaken()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -50,4 +55,3 @@ public class WallCell implements Cell {
         return position.y;
     }
 }
-

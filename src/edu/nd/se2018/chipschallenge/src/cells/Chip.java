@@ -1,29 +1,31 @@
 package cells;
 
-import javafx.scene.image.ImageView;
-import main.Player;
+import main.Grid;
 import utilities.IVProducer;
+import javafx.scene.image.ImageView;
 
 import java.awt.*;
 
-public class WaterCell implements Cell {
+public class Chip implements CellBehavior {
 
     private ImageView iv;
     private Point position;
 
-    public WaterCell(final int x, final int y) {
+    public Chip(final int x, final int y) {
         position = new Point(x, y);
-        iv = new IVProducer("textures/water.png", position.x, position.y).getImageView();
+        iv = new IVProducer("textures/chip.PNG", position.x, position.y).getImageView();
+        Grid.getInstance().incrementChips();
     }
 
     @Override
     public boolean canEnter() {
+        Grid.getInstance().takeChip();
         return true;
     }
 
     @Override
     public boolean isDeadly() {
-        return !Player.getInstance().canSwim();
+        return false;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class WaterCell implements Cell {
 
     @Override
     public boolean isLand() {
-        return false;
+        return true;
     }
 
     @Override
@@ -51,4 +53,3 @@ public class WaterCell implements Cell {
         return position.y;
     }
 }
-

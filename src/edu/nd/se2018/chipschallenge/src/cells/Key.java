@@ -1,28 +1,29 @@
 package cells;
 
-import main.Grid;
-import utilities.IVProducer;
 import javafx.scene.image.ImageView;
+import main.Player;
+import utilities.Color;
+import utilities.IVProducer;
 
 import java.awt.*;
 
-public class PortalGateCell implements Cell {
+public class Key implements CellBehavior {
 
     private ImageView iv;
     private Point position;
+    private Color key;
 
-    public PortalGateCell(final int x, final int y) {
+    public Key(final int x, final int y, final Color color) {
         position = new Point(x, y);
-        iv = new IVProducer("textures/portalGate.PNG", x, y).getImageView();
+        key = color;
+        final String filepath = String.format("textures/%sKey.PNG", color.getString());
+        iv = new IVProducer(filepath, position.x, position.y).getImageView();
     }
 
     @Override
     public boolean canEnter() {
-        if (Grid.getInstance().allChipsTaken()) {
-            return true;
-        }
-
-        return false;
+        Player.getInstance().takeKey(key);
+        return true;
     }
 
     @Override

@@ -1,26 +1,28 @@
 package cells;
 
-import main.Grid;
+import main.Player;
+import utilities.Color;
 import utilities.IVProducer;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
 
-public class ChipCell implements Cell {
+public class Door implements CellBehavior {
 
     private ImageView iv;
     private Point position;
+    private Color key;
 
-    public ChipCell(final int x, final int y) {
+    public Door(final int x, final int y, final Color color) {
         position = new Point(x, y);
-        iv = new IVProducer("textures/chip.PNG", position.x, position.y).getImageView();
-        Grid.getInstance().incrementChips();
+        key = color;
+        final String filepath = String.format("textures/%sKeyWall.PNG", color.getString());
+        iv = new IVProducer(filepath, position.x, position.y).getImageView();
     }
 
     @Override
     public boolean canEnter() {
-        Grid.getInstance().takeChip();
-        return true;
+        return Player.getInstance().useKey(key);
     }
 
     @Override

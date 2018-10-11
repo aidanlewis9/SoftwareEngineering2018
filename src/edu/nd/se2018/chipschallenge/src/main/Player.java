@@ -1,9 +1,8 @@
 package main;
 
-import cells.Cell;
-import cells.OpenCell;
-import cells.PlayerCell;
-import cells.WaterCell;
+import cells.CellBehavior;
+import cells.Open;
+import cells.Water;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -21,7 +20,7 @@ public class Player {
     private static Player player;
 
     private Point position;
-    private PlayerCell cell;
+    private cells.Player cell;
     private List<Color> keys;
     private boolean canSwim;
     private State state;
@@ -32,7 +31,7 @@ public class Player {
         canSwim = false;
         state = State.LAND;
 
-        cell = new PlayerCell(position.x, position.y, Orientation.UP, state);
+        cell = new cells.Player(position.x, position.y, Orientation.UP, state);
 
     }
 
@@ -49,7 +48,7 @@ public class Player {
         return cell.getImageView();
     }
 
-    public PlayerCell getCell() {
+    public cells.Player getCell() {
         return cell;
     }
 
@@ -66,9 +65,9 @@ public class Player {
         root.getChildren().remove(grid.getCell(position.x, position.y).getImageView());
 
         if (state == State.LAND) {
-            grid.setCell(new OpenCell(position.x, position.y));
+            grid.setCell(new Open(position.x, position.y));
         } else {
-            grid.setCell(new WaterCell(position.x, position.y));
+            grid.setCell(new Water(position.x, position.y));
         }
 
 
@@ -98,7 +97,7 @@ public class Player {
         toggleState();
 
         // set new player location
-        grid.setCell(new PlayerCell(position.x, position.y, orientation, state));
+        grid.setCell(new cells.Player(position.x, position.y, orientation, state));
         root.getChildren().add(grid.getCell(position.x, position.y).getImageView());
 
         return state;
@@ -164,7 +163,7 @@ public class Player {
     }
 
     private void toggleState() {
-        Cell cell = Grid.getInstance().getCell(position.x, position.y);
+        CellBehavior cell = Grid.getInstance().getCell(position.x, position.y);
 
         if (cell.isDeadly()) {
             state = State.DEAD;

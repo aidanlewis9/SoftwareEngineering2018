@@ -7,12 +7,12 @@ import utilities.State;
 
 import java.awt.*;
 
-public class PlayerCell implements Cell {
+public class Player implements CellBehavior {
 
     private ImageView iv;
     private Point position;
 
-    public PlayerCell(final int x, final int y, final Orientation orientation, final State state) {
+    public Player(final int x, final int y, final Orientation orientation, final State state) {
         position = new Point(x, y);
 
         final String filepath = getFilepath(state, orientation);

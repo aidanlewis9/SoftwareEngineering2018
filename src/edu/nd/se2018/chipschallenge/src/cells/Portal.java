@@ -1,28 +1,22 @@
 package cells;
 
-import javafx.scene.image.ImageView;
-import main.Player;
-import utilities.Color;
 import utilities.IVProducer;
+import javafx.scene.image.ImageView;
 
 import java.awt.*;
 
-public class KeyCell implements Cell {
+public class Portal implements CellBehavior {
 
     private ImageView iv;
     private Point position;
-    private Color key;
 
-    public KeyCell(final int x, final int y, final Color color) {
+    public Portal(final int x, final int y) {
         position = new Point(x, y);
-        key = color;
-        final String filepath = String.format("textures/%sKey.PNG", color.getString());
-        iv = new IVProducer(filepath, position.x, position.y).getImageView();
+        iv = new IVProducer("textures/portal.png", position.x, position.y).getImageView();
     }
 
     @Override
     public boolean canEnter() {
-        Player.getInstance().takeKey(key);
         return true;
     }
 
@@ -33,7 +27,7 @@ public class KeyCell implements Cell {
 
     @Override
     public boolean hasWon() {
-        return false;
+        return true;
     }
 
     @Override

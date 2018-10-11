@@ -1,18 +1,19 @@
 package cells;
 
-import utilities.IVProducer;
 import javafx.scene.image.ImageView;
+import main.Player;
+import utilities.IVProducer;
 
 import java.awt.*;
 
-public class PortalCell implements Cell {
+public class Water implements CellBehavior {
 
     private ImageView iv;
     private Point position;
 
-    public PortalCell(final int x, final int y) {
+    public Water(final int x, final int y) {
         position = new Point(x, y);
-        iv = new IVProducer("textures/portal.png", position.x, position.y).getImageView();
+        iv = new IVProducer("textures/water.png", position.x, position.y).getImageView();
     }
 
     @Override
@@ -22,17 +23,17 @@ public class PortalCell implements Cell {
 
     @Override
     public boolean isDeadly() {
-        return false;
+        return !Player.getInstance().canSwim();
     }
 
     @Override
     public boolean hasWon() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isLand() {
-        return true;
+        return false;
     }
 
     @Override
@@ -50,3 +51,4 @@ public class PortalCell implements Cell {
         return position.y;
     }
 }
+

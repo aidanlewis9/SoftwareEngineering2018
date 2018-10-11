@@ -7,11 +7,11 @@ public class Grid {
     private static final int GRID_DIMENSIONS = 25;
 
     private static Grid grid;
-    private Cell cells[][];
+    private CellBehavior cells[][];
     private int chipsRemaining;
 
     public Grid() {
-        cells = new Cell[GRID_DIMENSIONS][GRID_DIMENSIONS];
+        cells = new CellBehavior[GRID_DIMENSIONS][GRID_DIMENSIONS];
     }
 
     public static Grid getInstance() {
@@ -26,11 +26,11 @@ public class Grid {
         return GRID_DIMENSIONS;
     }
 
-    public void setCell(final Cell cell) {
+    public void setCell(final CellBehavior cell) {
         cells[cell.getX()][cell.getY()] = cell;
     }
 
-    public Cell getCell(final int i, final int j) {
+    public CellBehavior getCell(final int i, final int j) {
         return cells[i][j];
     }
 

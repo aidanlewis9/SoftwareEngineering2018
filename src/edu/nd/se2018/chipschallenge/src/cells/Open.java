@@ -1,24 +1,22 @@
 package cells;
 
-import main.Player;
 import utilities.IVProducer;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
 
-public class FishCell implements Cell {
+public class Open implements CellBehavior {
 
     private ImageView iv;
     private Point position;
 
-    public FishCell(final int x, final int y) {
+    public Open(final int x, final int y) {
         position = new Point(x, y);
-        iv = new IVProducer("textures/fish.PNG", position.x, position.y).getImageView();
+        iv = new IVProducer("textures/BlankTile.png", position.x, position.y).getImageView();
     }
 
     @Override
     public boolean canEnter() {
-        Player.getInstance().takeFish();
         return true;
     }
 

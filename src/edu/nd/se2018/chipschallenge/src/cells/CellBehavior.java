@@ -2,7 +2,7 @@ package cells;
 
 import javafx.scene.image.ImageView;
 
-public interface Cell {
+public interface CellBehavior {
     boolean canEnter();
     boolean isDeadly();
     boolean hasWon();
